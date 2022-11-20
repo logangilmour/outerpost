@@ -77,19 +77,18 @@ function step_2_accept_remote_offer(data) {
         };
         const answer = yield connection.createAnswer();
         yield connection.setLocalDescription(answer);
-        channel.onopen = function (event) {
-            var readyState = channel.readyState;
-            if (readyState == "open") {
-                channel.send("Hello");
-            }
-        };
     });
 }
 function step_4_accept_answer(data) {
     return __awaiter(this, void 0, void 0, function* () {
         const answer = JSON.parse(data);
         yield connection.setRemoteDescription(answer);
-        channel.send("YO IT WORKED");
+        channel.onopen = function (event) {
+            var readyState = channel.readyState;
+            if (readyState == "open") {
+                channel.send("Hello");
+            }
+        };
     });
 }
 //# sourceMappingURL=main.js.map

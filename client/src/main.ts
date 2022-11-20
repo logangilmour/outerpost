@@ -80,17 +80,17 @@ let channel = null
 
         const answer = await connection.createAnswer()
         await connection.setLocalDescription(answer)
-        channel.onopen = function(event) {
-          var readyState = channel.readyState;
-          if (readyState == "open") {
-            channel.send("Hello");
-          }
-        };
+        
       }
 
 
       async function step_4_accept_answer(data) {
         const answer = JSON.parse(data)
         await connection.setRemoteDescription(answer)
-        channel.send("YO IT WORKED")
+        channel.onopen = function(event) {
+          var readyState = channel.readyState;
+          if (readyState == "open") {
+            channel.send("Hello");
+          }
+        };
       }
