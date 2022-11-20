@@ -46,6 +46,14 @@ connection.ondatachannel = (event) => {
     // channel.onopen = event => console.log('onopen', event);
     // channel.onmessage = event => console.log('onmessage', event);
     channel.onmessage = (event) => alert(event.data);
+    if (role === 'CLIENT') {
+        channel.onopen = function (event) {
+            var readyState = channel.readyState;
+            if (readyState == "open") {
+                channel.send("Hello");
+            }
+        };
+    }
 };
 connection.onconnectionstatechange = (event) => console.log('onconnectionstatechange', connection.connectionState);
 connection.oniceconnectionstatechange = (event) => console.log('oniceconnectionstatechange', connection.iceConnectionState);
@@ -83,12 +91,6 @@ function step_4_accept_answer(data) {
     return __awaiter(this, void 0, void 0, function* () {
         const answer = JSON.parse(data);
         yield connection.setRemoteDescription(answer);
-        channel.onopen = function (event) {
-            var readyState = channel.readyState;
-            if (readyState == "open") {
-                channel.send("Hello");
-            }
-        };
     });
 }
 //# sourceMappingURL=main.js.map

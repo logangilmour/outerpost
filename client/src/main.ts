@@ -45,6 +45,15 @@ let channel = null
         // channel.onopen = event => console.log('onopen', event);
         // channel.onmessage = event => console.log('onmessage', event);
         channel.onmessage = (event) => alert(event.data)
+
+        if(role==='CLIENT'){
+          channel.onopen = function(event) {
+            var readyState = channel.readyState;
+            if (readyState == "open") {
+              channel.send("Hello");
+            }
+          };
+        }
       }
 
       connection.onconnectionstatechange = (event) =>  console.log('onconnectionstatechange', connection.connectionState)
@@ -87,10 +96,4 @@ let channel = null
       async function step_4_accept_answer(data) {
         const answer = JSON.parse(data)
         await connection.setRemoteDescription(answer)
-        channel.onopen = function(event) {
-          var readyState = channel.readyState;
-          if (readyState == "open") {
-            channel.send("Hello");
-          }
-        };
       }
