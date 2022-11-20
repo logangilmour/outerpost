@@ -77,6 +77,12 @@ function step_2_accept_remote_offer(data) {
         };
         const answer = yield connection.createAnswer();
         yield connection.setLocalDescription(answer);
+        channel.onopen = function (event) {
+            var readyState = channel.readyState;
+            if (readyState == "open") {
+                channel.send("Hello");
+            }
+        };
     });
 }
 function step_4_accept_answer(data) {
