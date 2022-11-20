@@ -80,6 +80,12 @@ let channel = null
 
         const answer = await connection.createAnswer()
         await connection.setLocalDescription(answer)
+        channel.onopen = function(event) {
+          var readyState = channel.readyState;
+          if (readyState == "open") {
+            channel.send("Hello");
+          }
+        };
       }
 
 
