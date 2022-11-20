@@ -1,3 +1,2 @@
-client/out/*
-server/out/*
+
 server/node_modules/*
