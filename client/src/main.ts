@@ -1,4 +1,4 @@
-const ws = new WebSocket('ws://localhost:8080');
+const ws = new WebSocket('ws://137.184.5.64:8080');
 
 
 
